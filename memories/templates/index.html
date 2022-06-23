@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pamyat</title>
+</head>
+<body>
+    <h1>Pamyat Memory Database</h1>
+    <p>For a birthday gift to you, I've made a "card" with some extra functionality. It's a way to store memories of any kind. If you'd like any revisions, let me know! Consider it a digital scrapbook.</p>
+    <p>Happy 55th, Dad!</p>
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>        
+        <input type="submit" value="Submit">
+    </form>
+
+    {% for memory in memories %}
+        <h2>{{ memory.title }}</h2>
+        <h4>{{ memory.start_date }}</h4>
+        <p>{{ memory.description }}</p>
+        <a href="{% url 'confirm_delete' memory.id %}">Delete?</a>
+    {% endfor %}
+</body>
+</html>
